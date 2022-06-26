@@ -1,8 +1,8 @@
 import { Routes, Route, Link } from 'react-router-dom';
-import WelcomePage from './core/welcome';
-import BaseAuthPage from './core/baseAuth';
-import RegisterPage from './core/baseAuth/register';
-import { LoginPage } from './core/baseAuth/login';
+import WelcomePage from './pages/welcome';
+import BaseAuthPage from './pages/baseAuth';
+import RegisterPage from './pages/baseAuth/register';
+import { LoginPage } from './pages/baseAuth/login';
 
 function App() {
   return (

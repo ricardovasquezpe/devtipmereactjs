@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import store from "./../../redux/store";
+import store from "../../redux/store";
 import { onLogin, onLogout } from "../../redux/auth/authAction";
 
 export function LoginPage (props: any){
