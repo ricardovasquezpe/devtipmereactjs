@@ -26,14 +26,16 @@ export default function index() {
 
     return (
         <>
-            <h3>
-                Login Page
-            </h3>
-            <button onClick={login}>Login Action</button>
-            <button onClick={logout}>Logout Action</button>
-            <button onClick={goToRegister}>Go To register</button>
+            <AuthLayout>
+                <h3>
+                    Login Page
+                </h3>
+                <button onClick={login}>Login Action</button>
+                <button onClick={logout}>Logout Action</button>
+                <button onClick={goToRegister}>Go To register</button>
+            </AuthLayout>
         </>
     );
 }
 
-index.Layout = AuthLayout;
+//index.Layout = AuthLayout;

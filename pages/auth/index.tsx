@@ -1,13 +1,14 @@
-import AuthLayout from "../../components/authLayout";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function index() {
-    return (
-        <>
-            <h3>
-                Login Page
-            </h3>
-        </>
-    );
+    const navigate = useRouter();
+
+    useEffect(() => {
+        navigate.replace("/auth/login");
+    });
+
+    return (<></>);
 }
 
-index.Layout = AuthLayout;
+//index.Layout = AuthLayout;
