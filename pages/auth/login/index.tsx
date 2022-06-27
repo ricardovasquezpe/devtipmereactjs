@@ -11,8 +11,9 @@ export default function index() {
     const [loggedIn, setLoggedIn] = useState(false);
 
     store.subscribe(() => {
-        console.log(store.getState().auth.isLoggedIn);
-        setLoggedIn(store.getState().auth.isLoggedIn);
+        var isLoggedIn = store.getState();
+        console.log(isLoggedIn.auth.isLoggedIn);
+        setLoggedIn(isLoggedIn.auth.isLoggedIn);
     }); 
 
     const goToRegister = () => {
