@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AuthLayout from "../../../components/authLayout";
 import { onLogin, onLogout } from "../../../redux/auth/authAction";
 import store from "../../../redux/store";
@@ -15,6 +15,13 @@ export default function index() {
         console.log(isLoggedIn.auth.isLoggedIn);
         setLoggedIn(isLoggedIn.auth.isLoggedIn);
     }); 
+
+    const isLoggedIn = useSelector((state:any) => state.auth.isLoggedIn);
+
+    useEffect(() => {
+        console.log('render!');
+        return () => console.log('unmounting...');
+    })
 
     const goToRegister = () => {
         navigate.replace("/auth/register");
@@ -33,6 +40,7 @@ export default function index() {
             <AuthLayout>
                 <h3>
                     Login Page {loggedIn.toString()}
+                    {isLoggedIn.toString()}
                 </h3>
                 <button onClick={login}>Login Action</button>
                 <button onClick={logout}>Logout Action</button>
