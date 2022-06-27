@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import AuthLayout from "../../../components/authLayout";
 import { onLogin, onLogout } from "../../../redux/auth/authAction";
@@ -7,9 +8,11 @@ import store from "../../../redux/store";
 export default function index() {
     const navigate = useRouter();
     const dispatch = useDispatch();
+    const [loggedIn, setLoggedIn] = useState(false);
 
     store.subscribe(() => {
-        console.log(store.getState());
+        console.log(store.getState().auth.isLoggedIn);
+        setLoggedIn(store.getState().auth.isLoggedIn);
     }); 
 
     const goToRegister = () => {
@@ -28,7 +31,7 @@ export default function index() {
         <>
             <AuthLayout>
                 <h3>
-                    Login Page
+                    Login Page {loggedIn.toString()}
                 </h3>
                 <button onClick={login}>Login Action</button>
                 <button onClick={logout}>Logout Action</button>
