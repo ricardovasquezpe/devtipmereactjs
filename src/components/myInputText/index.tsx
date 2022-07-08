@@ -1,12 +1,17 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "./index.scss";
 
-class MyInputText extends Component {
+type MyProps = {
+    type?: string, 
+    placeHolder?: string
+};
+
+class MyInputText extends React.Component<MyProps>{
     render(){
         return (
             <>
                 <form>
-                    <input className="myInput" type="{{this.type}}" placeholder="{{this.placeHolder}}" />
+                    <input className="myInput" type={this.props.type} placeholder={this.props.placeHolder} />
                 </form>
             </>
         );

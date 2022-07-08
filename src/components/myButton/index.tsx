@@ -1,14 +1,15 @@
-import { Component } from "react";
 import "./index.scss";
 
-class MyButton extends Component {
-    render(){
-        return (
-            <>
-                <button className="myButton">Login</button>
-            </>
-        );
+export function MyButton (props: any){
+    const onButtonClick = () => {
+        if(props.onClickAction){
+         props.onClickAction();
+        }
     }
-}
 
-export default MyButton;
+    return (
+        <>
+            <button className="myButton" onClick={onButtonClick}>{props.text}</button>
+        </>
+    );
+}
