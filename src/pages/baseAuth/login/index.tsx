@@ -46,10 +46,6 @@ export function LoginPage (props: any){
         setShow(true);
     }
 
-    const closeModal = () => {
-        setShow(false);
-    }
-
     return (
         <>
             <h3>
@@ -65,7 +61,8 @@ export function LoginPage (props: any){
                          handleClose={() => setShow(false)}
                          handleShow={() => setShow(true)}
                          modalTitle="Modal Demo"
-                         size="sm">
+                         size="sm"
+                         verticalCenter={true}>
                 <Login></Login>         
             </CustomModal>
         </>

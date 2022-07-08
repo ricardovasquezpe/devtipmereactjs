@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.scss";
 import MyInputText from "../myInputText";
 import { MyButton } from "../myButton";
@@ -8,14 +8,11 @@ type State = {
 };
 
 class Login extends React.Component<{}, State> {
-
     constructor(props: any){ 
         super(props);
         this.state = {
-            errorMsg :'test'
+            errorMsg :''
         };
-        
-        this.doLogin = this.doLogin.bind(this);
     }
     
     doLogin(){
