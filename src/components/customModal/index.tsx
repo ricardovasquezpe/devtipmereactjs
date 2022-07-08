@@ -5,7 +5,7 @@ const CustomModal = (props: any) => {
   const { show, handleClose, size, verticalCenter } = props;
   return (
     <Modal onClose={handleClose} size={size} show={show} onHide={handleClose} centered={verticalCenter}>
-      {props.children}
+      <Modal.Body>{props.children}</Modal.Body>
     </Modal>
   );
 };

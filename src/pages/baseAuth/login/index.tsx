@@ -4,7 +4,7 @@ import store from "../../../redux/store";
 import { useEffect, useState } from "react";
 import { onLogin, onLogout } from "../../../redux/auth/authAction";
 import CustomModal from "../../../components/customModal";
-import Login from "../../../components/login";
+import { Login } from "../../../components/login";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();

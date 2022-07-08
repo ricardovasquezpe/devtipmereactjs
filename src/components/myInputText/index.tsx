@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 import "./index.scss";
 
-type MyProps = {
-    type?: string, 
-    placeHolder?: string
-};
 
-class MyInputText extends React.Component<MyProps>{
-    render(){
-        return (
-            <>
-                <form>
-                    <input className="myInput" type={this.props.type} placeholder={this.props.placeHolder} />
-                </form>
-            </>
-        );
-    }
+export function MyInputText(props: any){
+    return (
+        <>
+            <input className="myInput" {...props.reactForm(props.name, props.rules)} type={props.type} placeholder={props.placeHolder} />
+        </>
+    );
 }
-
-export default MyInputText;
