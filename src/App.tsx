@@ -3,13 +3,13 @@ import WelcomePage from './pages/welcome';
 import BaseAuthPage from './pages/baseAuth';
 import RegisterPage from './pages/baseAuth/register';
 import { LoginPage } from './pages/baseAuth/login';
+import MyHeader from './components/myHeader';
 
 function App() {
   return (
     <>
       <div>
-        <Link to="/">Welcome</Link>
-        <Link to="/auth">Auth</Link>
+        <MyHeader></MyHeader>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="auth" element={<BaseAuthPage />}>

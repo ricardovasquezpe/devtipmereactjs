@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import store from "../../redux/store";
-import { onLogin, onLogout } from "../../redux/auth/authAction";
+import store from "../../../redux/store";
 import { useEffect, useState } from "react";
+import { onLogin, onLogout } from "../../../redux/auth/authAction";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();
