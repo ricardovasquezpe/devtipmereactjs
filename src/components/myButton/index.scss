@@ -1,0 +1,23 @@
+.myButton{
+    width: 100%;
+    border-radius:0.8rem;
+}
+
+.myButton:active{
+    outline: none;
+    border: 0px solid solid;
+}
+
+.myButton:visited{
+    outline: none;
+    border: 0px solid solid;
+}
+
+.myButton:hover{
+    background-color: #414040;
+    color: white;
+}
+
+.myButton:focus {
+    outline: none;
+}

@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import store from "../../../redux/store";
 import { useEffect, useState } from "react";
 import { onLogin, onLogout } from "../../../redux/auth/authAction";
+import CustomModal from "../../../components/customModal";
+import Login from "../../../components/login";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();
     const [loggedIn, setloggedIn] = useState(false);
+    const [show, setShow] = useState(false);
+
     const dispatch = useDispatch();
 
     store.subscribe(() => {
@@ -38,6 +42,14 @@ export function LoginPage (props: any){
         dispatch(onLogout());
     }
 
+    const openModal = () => {
+        setShow(true);
+    }
+
+    const closeModal = () => {
+        setShow(false);
+    }
+
     return (
         <>
             <h3>
@@ -47,6 +59,15 @@ export function LoginPage (props: any){
             <button onClick={login}>Login Action</button>
             <button onClick={logout}>Logout Action</button>
             <button onClick={goToRegister}>GoToRegister</button>
+
+            <button onClick={openModal}>OpenModal</button>
+            <CustomModal show={show}
+                         handleClose={() => setShow(false)}
+                         handleShow={() => setShow(true)}
+                         modalTitle="Modal Demo"
+                         size="sm">
+                <Login></Login>         
+            </CustomModal>
         </>
     );
 }
