@@ -12,13 +12,9 @@ export function Login(props: any){
         console.log(data);
     }
 
-    const test = () => {
-        trigger();
-    }
-
     return (
         <>
-            <form>
+            <form onSubmit={handleLogin(doLogin)}>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 text-center">
@@ -34,7 +30,7 @@ export function Login(props: any){
                             <p style={{marginTop: "15px", marginBottom: "0px"}} className="error">{ errorMsg }</p>
                         </div>
                         <div className="col-sm-12 mt-3">
-                            <MyButton text={"Login"} type={"button"} onClickAction={test}></MyButton>   
+                            <MyButton text={"Login"} type={"submit"}></MyButton>   
                         </div>
                     </div>
                 </div>
