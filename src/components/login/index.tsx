@@ -18,8 +18,8 @@ export function Login(props: any){
                 console.log(response);
                 setLoading(false);
             }).catch((err: any) => {
+                setErrorMsg(err);
                 setLoading(false);
-                console.log(err);
             });;
         }
     }

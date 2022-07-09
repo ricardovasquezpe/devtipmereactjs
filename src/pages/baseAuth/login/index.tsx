@@ -6,6 +6,7 @@ import { onLogin, onLogout } from "../../../store/auth/authAction";
 import CustomModal from "../../../components/customModal";
 import { Login } from "../../../components/login";
 import LoadingModal from "../../../components/loadingModal";
+import { Register } from "../../../components/register";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();
@@ -58,13 +59,13 @@ export function LoginPage (props: any){
             <button onClick={goToRegister}>GoToRegister</button>
 
             <button onClick={openModal}>OpenModal</button>
+            
+
             <CustomModal show={show}
                          handleClose={() => setShow(false)}
-                         handleShow={() => setShow(true)}
-                         modalTitle="Modal Demo"
                          size="sm"
                          verticalCenter={true}>
-                <Login></Login>         
+                <Register></Register>         
             </CustomModal>
         </>
     );

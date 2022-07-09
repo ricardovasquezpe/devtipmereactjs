@@ -1,4 +1,4 @@
-import { LOGIN_API_URL } from "../utils/constants";
+import { LOGIN_API_URL, REGISTER_API_URL } from "../utils/constants";
 
 const axios = require('axios');
 
@@ -8,4 +8,8 @@ const client = axios.create({
 
 export function doLogin(payload: any) {
     return client.post(LOGIN_API_URL, payload);    
+}
+
+export function doRegister(payload: any) {
+    return client.post(REGISTER_API_URL, payload);    
 }
