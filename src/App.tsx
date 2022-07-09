@@ -5,10 +5,12 @@ import RegisterPage from './pages/baseAuth/register';
 import { LoginPage } from './pages/baseAuth/login';
 import MyHeader from './components/myHeader';
 import "./global.scss";
+import SideNavBar from './components/sideNavBar';
 
 function App() {
   return (
     <>
+      <SideNavBar direction={"left"} navWidth={280} duration={0.5} show={true}></SideNavBar>
       <div className="main-container">
         <MyHeader></MyHeader>
         <section className="wrap">

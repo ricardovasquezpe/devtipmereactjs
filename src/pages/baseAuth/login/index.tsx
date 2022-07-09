@@ -4,8 +4,6 @@ import store from "../../../store/store";
 import { useEffect, useState } from "react";
 import { onLogin, onLogout } from "../../../store/auth/authAction";
 import CustomModal from "../../../components/customModal";
-import { Login } from "../../../components/login";
-import LoadingModal from "../../../components/loadingModal";
 import { Register } from "../../../components/register";
 
 export function LoginPage (props: any){
