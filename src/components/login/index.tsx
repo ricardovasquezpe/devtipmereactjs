@@ -3,14 +3,19 @@ import "./index.scss";
 import { MyButton } from "../myButton";
 import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
+import { doLogin } from "../../services/authService";
 
 export function Login(props: any){
     const [ errorMsg, setErrorMsg ] = useState("");
-    const { register: login, trigger } = useForm();
-    const doLogin = async () => {
-        const isValid = await trigger(["email", "password"], { shouldFocus: true });
+    const { register: login, trigger: loginTrigger, getValues: loginGetvalues } = useForm();
+    const goLogin = async () => {
+        const isValid = await loginTrigger(["email", "password"], { shouldFocus: true });
         if(isValid){
-            
+            doLogin(loginGetvalues()).then((response:any) => {
+                console.log(response);
+            }).catch((err: any) => {
+                console.log(err);
+            });;
         }
     }
 
@@ -32,7 +37,7 @@ export function Login(props: any){
                             <p style={{marginTop: "15px", marginBottom: "0px"}} className="error">{ errorMsg }</p>
                         </div>
                         <div className="col-sm-12 mt-3">
-                            <MyButton text={"Login"} type={"button"} onClickAction={doLogin}></MyButton>   
+                            <MyButton text={"Login"} type={"button"} onClickAction={goLogin}></MyButton>   
                         </div>
                     </div>
                 </div>
