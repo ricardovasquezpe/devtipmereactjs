@@ -4,16 +4,21 @@ import { MyButton } from "../myButton";
 import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
 import { doLogin } from "../../services/authService";
+import LoadingModal from "../loadingModal";
 
 export function Login(props: any){
+    const [ loading, setLoading ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState("");
     const { register: login, trigger: loginTrigger, getValues: loginGetvalues } = useForm();
     const goLogin = async () => {
         const isValid = await loginTrigger(["email", "password"], { shouldFocus: true });
         if(isValid){
+            setLoading(true);
             doLogin(loginGetvalues()).then((response:any) => {
                 console.log(response);
+                setLoading(false);
             }).catch((err: any) => {
+                setLoading(false);
                 console.log(err);
             });;
         }
@@ -42,6 +47,7 @@ export function Login(props: any){
                     </div>
                 </div>
             </form>
+            <LoadingModal show={loading}></LoadingModal>
         </>
     );
     

@@ -1,0 +1,26 @@
+.loadingBackDrop{
+    z-index: 1050;
+}
+
+.loading.modal.show .modal-dialog{
+    justify-content: center;
+  	align-items: center;
+}
+
+.loading.modal.show .modal-content{
+    width: 100px;
+    height: 100px;
+    border: 0px !important;
+}
+
+.loading.modal .modal-content{
+    width: 100px;
+    height: 100px;
+    border: 0px !important;
+}
+
+@media (min-width: 576px){
+    .loading.modal .modal-sm {
+        max-width: 100px !important;
+    }
+}

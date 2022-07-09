@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { onLogin, onLogout } from "../../../store/auth/authAction";
 import CustomModal from "../../../components/customModal";
 import { Login } from "../../../components/login";
+import LoadingModal from "../../../components/loadingModal";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();
