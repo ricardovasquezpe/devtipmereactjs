@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import store from "../../../redux/store";
+import store from "../../../store/store";
 import { useEffect, useState } from "react";
-import { onLogin, onLogout } from "../../../redux/auth/authAction";
+import { onLogin, onLogout } from "../../../store/auth/authAction";
 import CustomModal from "../../../components/customModal";
 import { Login } from "../../../components/login";
 

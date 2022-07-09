@@ -5,16 +5,18 @@ import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
 
 export function Login(props: any){
-    const [errorMsg, setErrorMsg] = useState("");
-    const { register: login, handleSubmit: handleLogin, formState: { errors }, trigger } = useForm();
-    const doLogin = (data: any) => {
-        setErrorMsg("Error!!");
-        console.log(data);
+    const [ errorMsg, setErrorMsg ] = useState("");
+    const { register: login, trigger } = useForm();
+    const doLogin = async () => {
+        const isValid = await trigger(["email", "password"], { shouldFocus: true });
+        if(isValid){
+            
+        }
     }
 
     return (
         <>
-            <form onSubmit={handleLogin(doLogin)}>
+            <form>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 text-center">
@@ -30,7 +32,7 @@ export function Login(props: any){
                             <p style={{marginTop: "15px", marginBottom: "0px"}} className="error">{ errorMsg }</p>
                         </div>
                         <div className="col-sm-12 mt-3">
-                            <MyButton text={"Login"} type={"submit"}></MyButton>   
+                            <MyButton text={"Login"} type={"button"} onClickAction={doLogin}></MyButton>   
                         </div>
                     </div>
                 </div>
