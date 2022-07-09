@@ -1,18 +1,11 @@
+import { LOGIN_API_URL } from "../utils/constants";
+
 const axios = require('axios');
 
 const client = axios.create({
-    baseURL: "http://localhost:5000" 
+    baseURL: process.env.REACT_APP_TEST_VAR 
 });
 
 export function doLogin(payload: any) {
-    const options = { headers: { 'content-type': 'application/json'} };
-    return client.post('/user/login', payload);
-    /*try{
-        const response = await axios.get('/api/users');
-        console.log('response  ', response)
-        return response.data;
-    }catch(error) {
-        return [];
-    }*/
-    
+    return client.post(LOGIN_API_URL, payload);    
 }
