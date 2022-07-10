@@ -18,7 +18,7 @@ export function SolutionCard (props: any){
         <>
             <div className="card">
                 <div className="card-body">
-                    <a href="javascript:void(0)" onClick={goToSolution}>
+                    <a onClick={goToSolution}>
                         <h5 className="card-title">
                             {props.data.title}
                         </h5>

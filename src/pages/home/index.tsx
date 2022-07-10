@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from "react";
+import { Component, useEffect, useRef, useState } from "react";
 import LoadingModal from "../../components/loadingModal";
 import { SolutionCard } from "../../components/solutionCard";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
@@ -12,6 +12,9 @@ export function HomePage (props: any){
     const [ trendingTopics, setTrendingTopics ] = useState([] as any);
     const [ solutions, setSolutions ] = useState([] as any);
     const [ loading, setLoading ] = useState(false);
+    let noMoreSolutions:boolean = false;
+    let offset: number = 0;
+    let solutionsTemp: CardSolution[] = [];
 
     useEffect(() => {
         setLoading(true);
@@ -19,6 +22,11 @@ export function HomePage (props: any){
         findSolutions();
         setLoading(false);
         console.log(solutions);
+        window.addEventListener("scroll", onScroll);
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+        };
     }, [])
 
     const listTrendings = () => {
@@ -36,16 +44,21 @@ export function HomePage (props: any){
             "text": "",
             "topic": "",
             "limit": 10,
-            "offset": 0
+            "offset": offset
         };
 
         postFindSolutions(body).then((response:any) => {
-            let listSolutions: CardSolution[] = [];
-            response.data.forEach((sol: any) => {
-                let content = getOnlyText(sol.content.filter((content: any) => content.type == 1));
-                listSolutions.push(new CardSolution(sol.encriptedId, sol.title, content, new Date(sol.createdAt), sol.status));
+            let data = response.data;
+            if(data.length == 0){
+                noMoreSolutions = true;
+                return;
+            }
+            data.forEach((solution: any) => {
+                let content = getOnlyText(solution.content.filter((content: any) => content.type == 1));
+                solutionsTemp.push(new CardSolution(solution.encriptedId, solution.title, content, new Date(solution.createdAt), solution.status));
             });
-            setSolutions(listSolutions);
+            console.log(solutionsTemp);
+            setSolutions(solutionsTemp);
         });
     }
 
@@ -55,6 +68,13 @@ export function HomePage (props: any){
             text += element.content + " ";
         });
         return text;
+    }
+
+    const onScroll = () => {
+        if ((document.body.scrollHeight - (window.innerHeight + window.scrollY) <= 1) && noMoreSolutions == false) {
+            offset = offset + 10;
+            findSolutions();
+        }
     }
 
     return (
@@ -67,7 +87,7 @@ export function HomePage (props: any){
                     <div className="col-sm-12">
                         {
                             trendingTopics.map((topic: Topic, index: any) => (
-                                <TrendingTopicPill className={index != 0 ? "ml-2" : ""} data={topic}></TrendingTopicPill>
+                                <TrendingTopicPill key={index} className={index != 0 ? "ml-2" : ""} data={topic}></TrendingTopicPill>
                             ))
                         }
                     </div>
@@ -80,7 +100,7 @@ export function HomePage (props: any){
                     <div className="row">
                         {
                             solutions.map((sol: CardSolution, index: any) => (
-                                <div className="col-sm-6 mb-2 card-wrap">
+                                <div className="col-sm-6 mb-2 card-wrap" key={index}>
                                     <SolutionCard data={sol}></SolutionCard>
                                 </div>
                             ))
