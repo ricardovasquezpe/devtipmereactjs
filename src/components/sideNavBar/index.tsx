@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { retrieveEmail } from "../../services/sessionManagerService";
 import { onToggle } from "../../store/sideNavBar/sideNavBarAction";
 import store from "../../store/store";
@@ -10,6 +11,7 @@ import SideNavBarContent from "../sideNavBarContent";
 import "./index.scss";
 
 export function SideNavBar(props: any){
+    let navigate = useNavigate();
     const dispatch = useDispatch();
     const [showSideNavBar, setShowSideNavBar] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -37,6 +39,11 @@ export function SideNavBar(props: any){
         dispatch(onToggle(false));
     }
 
+    const goToProfile = () => {
+        dispatch(onToggle(false));
+        navigate("/profile");
+    }
+
     return (
         <>
             <div className={"side-nav-bar " + ((!showSideNavBar) ? "side-nav-bar-collapsed" :  "" )}>
@@ -49,7 +56,7 @@ export function SideNavBar(props: any){
 
                     <div className="side-nav-bar-content-container">
                         {!loggedIn && <p className="username-login" onClick={() => {setLoginModal(true)}}>Login</p>}
-                        {loggedIn && <p className="username-login">{username}</p>}
+                        {loggedIn && <p className="username-login" onClick={goToProfile}>{username}</p>}
                         {!loggedIn && <p className="register" onClick={() => {setRegisterModal(true)}}>Register</p>}
                         
                         <SideNavBarContent></SideNavBarContent>
