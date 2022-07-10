@@ -44,9 +44,9 @@
     margin-left: 12px !important;
 }
 
-a {
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
     color: inherit;
-    text-decoration: inherit;
 }
 
 .card-body {

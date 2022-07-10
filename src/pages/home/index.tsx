@@ -42,10 +42,19 @@ export function HomePage (props: any){
         postFindSolutions(body).then((response:any) => {
             let listSolutions: CardSolution[] = [];
             response.data.forEach((sol: any) => {
-                listSolutions.push(new CardSolution(sol.encriptedId, sol.title, sol, new Date(sol.createdAt), sol.status));
+                let content = getOnlyText(sol.content.filter((content: any) => content.type == 1));
+                listSolutions.push(new CardSolution(sol.encriptedId, sol.title, content, new Date(sol.createdAt), sol.status));
             });
             setSolutions(listSolutions);
         });
+    }
+
+    const getOnlyText = (content: any): string => {
+        var text = "";
+        content.forEach(function(element: any) {
+            text += element.content + " ";
+        });
+        return text;
     }
 
     return (
