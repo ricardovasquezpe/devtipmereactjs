@@ -3,9 +3,9 @@ import WelcomePage from './pages/welcome';
 import BaseAuthPage from './pages/baseAuth';
 import RegisterPage from './pages/baseAuth/register';
 import { LoginPage } from './pages/baseAuth/login';
-import MyHeader from './components/myHeader';
 import "./global.scss";
 import SideNavBar from './components/sideNavBar';
+import { MyHeader } from './components/myHeader';
 
 function App() {
   return (

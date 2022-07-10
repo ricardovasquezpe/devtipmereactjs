@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../types";
+import { LOGIN, LOGOUT } from "./authTypes";
 
 const initialState = { isLoggedIn: false };
 export default function (state = initialState, action: any) {

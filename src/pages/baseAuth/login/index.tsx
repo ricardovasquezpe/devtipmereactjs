@@ -15,7 +15,7 @@ export function LoginPage (props: any){
 
     store.subscribe(() => {
         var storeLoggedIn = store.getState().auth.isLoggedIn;
-        console.log(storeLoggedIn);
+        //console.log(storeLoggedIn);
         setloggedIn(storeLoggedIn);
     });
 
