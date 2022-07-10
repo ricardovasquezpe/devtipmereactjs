@@ -8,15 +8,6 @@ import { Register } from "../../../components/register";
 
 export function LoginPage (props: any){
     let navigate = useNavigate();
-    const [loggedIn, setloggedIn] = useState(false);
-
-    const dispatch = useDispatch();
-
-    store.subscribe(() => {
-        //var storeLoggedIn = store.getState().auth.isLoggedIn;
-        //console.log(storeLoggedIn);
-        //setloggedIn(storeLoggedIn);
-    });
 
    /*useEffect(() => {
         // This gets called after every render, by default
@@ -29,27 +20,11 @@ export function LoginPage (props: any){
         return () => console.log('unmounting...');
     })*/
 
-    const goToRegister = () => {
-        navigate("/auth/register");
-    }
-
-    const login = () => {
-        //dispatch(onLogin());
-    }
-
-    const logout = () => {
-        //dispatch(onLogout());
-    }
-
     return (
         <>
             <h3>
                 Login Page
-                {loggedIn.toString()}
             </h3>
-            <button onClick={login}>Login Action</button>
-            <button onClick={logout}>Logout Action</button>
-            <button onClick={goToRegister}>GoToRegister</button>
         </>
     );
 }

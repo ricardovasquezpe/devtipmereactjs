@@ -3,11 +3,11 @@ import "./index.scss";
 import { MyButton } from "../myButton";
 import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
-import { doLogin } from "../../services/authService";
 import LoadingModal from "../loadingModal";
 import { useDispatch } from "react-redux";
 import { onLogin } from "../../store/auth/authAction";
 import { storeNewToken } from "../../services/sessionManagerService";
+import { postLogin } from "../../services/authService";
 
 export function Login(props: any){
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export function Login(props: any){
         const isValid = await loginTrigger(["email", "password"], { shouldFocus: true });
         if(isValid){
             setLoading(true);
-            doLogin(loginGetvalues()).then((response:any) => {
+            postLogin(loginGetvalues()).then((response:any) => {
                 var data = response.data;
                 if(data.error){
                     setErrorMsg(data.error);
@@ -36,7 +36,7 @@ export function Login(props: any){
             }).catch((err: any) => {
                 setErrorMsg(err);
                 setLoading(false);
-            });;
+            });
         }
     }
 

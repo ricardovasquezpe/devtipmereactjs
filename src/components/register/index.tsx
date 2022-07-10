@@ -3,11 +3,11 @@ import "./index.scss";
 import { MyButton } from "../myButton";
 import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
-import { doRegister } from "../../services/authService";
 import LoadingModal from "../loadingModal";
 import { storeNewToken } from "../../services/sessionManagerService";
 import { onLogin } from "../../store/auth/authAction";
 import { useDispatch } from "react-redux";
+import { postRegister } from "../../services/authService";
 
 export function Register(props: any){
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export function Register(props: any){
         const isValid = await registerTrigger(["email", "name", "password", "repeatPassword"], { shouldFocus: true });
         if(isValid && validateRegisterForm(registerGetValues())){
             setLoading(true);
-            doRegister(registerGetValues()).then((response:any) => {
+            postRegister(registerGetValues()).then((response:any) => {
                 var data = response.data;
                 if(data.error){
                     setErrorMsg(data.error);

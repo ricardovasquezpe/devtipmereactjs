@@ -6,10 +6,10 @@ const client = axios.create({
     baseURL: process.env.REACT_APP_API_URL 
 });
 
-export function doLogin(payload: any) {
+export function postLogin(payload: any) {
     return client.post(LOGIN_API_URL, payload);    
 }
 
-export function doRegister(payload: any) {
+export function postRegister(payload: any) {
     return client.post(REGISTER_API_URL, payload);    
 }
