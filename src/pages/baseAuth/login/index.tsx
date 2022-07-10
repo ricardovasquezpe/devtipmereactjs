@@ -13,12 +13,12 @@ export function LoginPage (props: any){
     const dispatch = useDispatch();
 
     store.subscribe(() => {
-        var storeLoggedIn = store.getState().auth.isLoggedIn;
+        //var storeLoggedIn = store.getState().auth.isLoggedIn;
         //console.log(storeLoggedIn);
-        setloggedIn(storeLoggedIn);
+        //setloggedIn(storeLoggedIn);
     });
 
-    useEffect(() => {
+   /*useEffect(() => {
         // This gets called after every render, by default
         // (the first one, and every one after that)
         console.log('render!');
@@ -27,18 +27,18 @@ export function LoginPage (props: any){
         // return a function from here, and React will call
         // it prior to unmounting.
         return () => console.log('unmounting...');
-      })
+    })*/
 
     const goToRegister = () => {
         navigate("/auth/register");
     }
 
     const login = () => {
-        dispatch(onLogin());
+        //dispatch(onLogin());
     }
 
     const logout = () => {
-        dispatch(onLogout());
+        //dispatch(onLogout());
     }
 
     return (

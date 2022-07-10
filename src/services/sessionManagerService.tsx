@@ -18,19 +18,19 @@ export function clearSession(){
 
 export function retrieveExpireTime(){
     let expireTimeRes = localStorage.getItem(expireTime);
-    if(!expireTimeRes) throw 'no time found';
+    if(!expireTimeRes) return '';
     return new Date(Number(expireTimeRes) * 1000)
 }
 
 export function retrieveEmail(){
     let storedEmail = localStorage.getItem(email);
-    if(!storedEmail) throw 'no email found';
+    if(!storedEmail) return '';
     return storedEmail;
 }
 
 export function retrieveName(){
     let storedName = localStorage.getItem(name);
-    if(!storedName) throw 'no name found';
+    if(!storedName) return '';
     return storedName;
 }
 

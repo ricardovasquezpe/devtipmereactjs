@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { retrieveEmail } from "../../services/sessionManagerService";
 import { onToggle } from "../../store/sideNavBar/sideNavBarAction";
 import store from "../../store/store";
 import CustomModal from "../customModal";
@@ -14,6 +15,7 @@ export function SideNavBar(props: any){
     const [loggedIn, setLoggedIn] = useState(false);
     const [registerModal, setRegisterModal] = useState(false);
     const [loginModal, setLoginModal] = useState(false);
+    const [username, setUsername] = useState("");
 
     const getSideNavBarStyle = () => {
         let navBarStyle: any = {};
@@ -28,6 +30,7 @@ export function SideNavBar(props: any){
         setShowSideNavBar(storeSideNavBarShow);
         var storeLoggedIn = store.getState().auth.isLoggedIn;
         setLoggedIn(storeLoggedIn);
+        setUsername(retrieveEmail());
     });
 
     const onCloseSidebar = () => {
@@ -46,7 +49,7 @@ export function SideNavBar(props: any){
 
                     <div className="side-nav-bar-content-container">
                         {!loggedIn && <p className="username-login" onClick={() => {setLoginModal(true)}}>Login</p>}
-                        {loggedIn && <p className="username-login">Ricardo</p>}
+                        {loggedIn && <p className="username-login">{username}</p>}
                         {!loggedIn && <p className="register" onClick={() => {setRegisterModal(true)}}>Register</p>}
                         
                         <SideNavBarContent></SideNavBarContent>

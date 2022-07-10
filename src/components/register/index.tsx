@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
 import { doRegister } from "../../services/authService";
 import LoadingModal from "../loadingModal";
+import { storeNewToken } from "../../services/sessionManagerService";
+import { onLogin } from "../../store/auth/authAction";
+import { useDispatch } from "react-redux";
 
 export function Register(props: any){
+    const dispatch = useDispatch();
     const [ loading, setLoading ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState("");
     const { register, trigger: registerTrigger, getValues: registerGetValues } = useForm();
@@ -15,8 +19,17 @@ export function Register(props: any){
         if(isValid && validateRegisterForm(registerGetValues())){
             setLoading(true);
             doRegister(registerGetValues()).then((response:any) => {
-                console.log(response);
+                var data = response.data;
+                if(data.error){
+                    setErrorMsg(data.error);
+                    setLoading(false);
+                    return;
+                }
+
+                storeNewToken(data.token, registerGetValues().email, registerGetValues().name);
+                dispatch(onLogin());
                 setLoading(false);
+                props.handleClose();
             }).catch((err: any) => {
                 setErrorMsg(err);
                 setLoading(false);

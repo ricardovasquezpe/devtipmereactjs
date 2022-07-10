@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearSession } from "../../services/sessionManagerService";
 import { onLogout } from "../../store/auth/authAction";
+import { onToggle } from "../../store/sideNavBar/sideNavBarAction";
 import store from "../../store/store";
 import "./index.scss";
 
@@ -14,6 +17,7 @@ export function SideNavBarContent(props: any){
         { label: 'Logout', route: '/logout'}
     ];
 
+    let navigate = useNavigate();
     const dispatch = useDispatch();
     const [ navItems, setNavItems ] = useState(navItemsNoUser);
 
@@ -26,16 +30,14 @@ export function SideNavBarContent(props: any){
         }
     });
 
-    useEffect(() => {
-        console.log('render!');
-    });
-
     const onNavigationSelection = (navItem: any) => {
-        console.log(navItem);
         if(navItem.label == "Logout"){
+            clearSession();
             dispatch(onLogout());
+            navigate("/");
         } else {
-            
+            dispatch(onToggle(false));
+            navigate(navItem.route);
         }
     }
 
@@ -44,8 +46,8 @@ export function SideNavBarContent(props: any){
             <div className="side-nav-bar-content">
                 <ul className="side-nav-bar-menu">
                     {
-                        navItems.map((navItem: any) => (
-                            <li onClick={() => onNavigationSelection(navItem)}>{ navItem.label }</li>
+                        navItems.map((navItem: any, index) => (
+                            <li key={index} onClick={() => onNavigationSelection(navItem)}>{ navItem.label }</li>
                         ))
                     } 
                 </ul>
