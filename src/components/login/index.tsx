@@ -5,18 +5,34 @@ import { useForm } from "react-hook-form";
 import { MyInputText } from "../myInputText";
 import { doLogin } from "../../services/authService";
 import LoadingModal from "../loadingModal";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../../store/auth/authAction";
+import { storeNewToken } from "../../services/sessionManagerService";
 
 export function Login(props: any){
+    const dispatch = useDispatch();
+    
     const [ loading, setLoading ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState("");
+
     const { register: login, trigger: loginTrigger, getValues: loginGetvalues } = useForm();
+
     const goLogin = async () => {
         const isValid = await loginTrigger(["email", "password"], { shouldFocus: true });
         if(isValid){
             setLoading(true);
             doLogin(loginGetvalues()).then((response:any) => {
-                console.log(response);
+                var data = response.data;
+                if(data.error){
+                    setErrorMsg(data.error);
+                    setLoading(false);
+                    return;
+                }
+
+                storeNewToken(data.token, loginGetvalues().email, data.name);
+                dispatch(onLogin());
                 setLoading(false);
+                props.handleClose();
             }).catch((err: any) => {
                 setErrorMsg(err);
                 setLoading(false);

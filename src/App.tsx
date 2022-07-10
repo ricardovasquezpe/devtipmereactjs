@@ -6,8 +6,25 @@ import { LoginPage } from './pages/baseAuth/login';
 import "./global.scss";
 import SideNavBar from './components/sideNavBar';
 import { MyHeader } from './components/myHeader';
+import { useEffect } from 'react';
+import { verifyAuth } from './services/sessionManagerService';
+import { useDispatch } from 'react-redux';
+import { onLogin, onLogout } from './store/auth/authAction';
 
-function App() {
+export function App(props: any){
+  const dispatch = useDispatch();
+  useEffect(() => {
+    verifyStorageAuth();
+  });
+
+  const verifyStorageAuth = async () => {
+    if(verifyAuth()){
+      dispatch(onLogin());
+    } else {
+      dispatch(onLogout());
+    }
+  }
+
   return (
     <>
       <SideNavBar direction={"left"} navWidth={280} duration={0.5} show={true}></SideNavBar>
@@ -28,5 +45,3 @@ function App() {
     
   );
 }
-
-export default App;

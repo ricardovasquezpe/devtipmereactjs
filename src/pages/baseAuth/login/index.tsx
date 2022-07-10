@@ -9,7 +9,6 @@ import { Register } from "../../../components/register";
 export function LoginPage (props: any){
     let navigate = useNavigate();
     const [loggedIn, setloggedIn] = useState(false);
-    const [show, setShow] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -42,10 +41,6 @@ export function LoginPage (props: any){
         dispatch(onLogout());
     }
 
-    const openModal = () => {
-        setShow(true);
-    }
-
     return (
         <>
             <h3>
@@ -55,16 +50,6 @@ export function LoginPage (props: any){
             <button onClick={login}>Login Action</button>
             <button onClick={logout}>Logout Action</button>
             <button onClick={goToRegister}>GoToRegister</button>
-
-            <button onClick={openModal}>OpenModal</button>
-            
-
-            <CustomModal show={show}
-                         handleClose={() => setShow(false)}
-                         size="sm"
-                         verticalCenter={true}>
-                <Register></Register>         
-            </CustomModal>
         </>
     );
 }

@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { onLogout } from "../../store/auth/authAction";
+import store from "../../store/store";
 import "./index.scss";
 
 export function SideNavBarContent(props: any){
     const navItemsNoUser = [
         { label: 'Search', route: '/search'}
     ];
-    const [ navItems, setNavItems ] = useState(navItemsNoUser);
     const navItemsUser = [
         { label: 'Search', route: '/search'},
         { label: 'New Solution', route: '/new-solution'},
         { label: 'Logout', route: '/logout'}
     ];
+
+    const dispatch = useDispatch();
+    const [ navItems, setNavItems ] = useState(navItemsNoUser);
+
+    store.subscribe(() => {
+        var storeLoggedIn = store.getState().auth.isLoggedIn;
+        if(storeLoggedIn){
+            setNavItems(navItemsUser);
+        } else {
+            setNavItems(navItemsNoUser);
+        }
+    });
 
     useEffect(() => {
         console.log('render!');
@@ -19,7 +33,7 @@ export function SideNavBarContent(props: any){
     const onNavigationSelection = (navItem: any) => {
         console.log(navItem);
         if(navItem.label == "Logout"){
-            
+            dispatch(onLogout());
         } else {
             
         }
