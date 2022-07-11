@@ -53,12 +53,12 @@ export function HomePage (props: any){
                 noMoreSolutions = true;
                 return;
             }
+            let solutions: CardSolution[] = [];
             data.forEach((solution: any) => {
                 let content = getOnlyText(solution.content.filter((content: any) => content.type == 1));
-                solutionsTemp.push(new CardSolution(solution.encriptedId, solution.title, content, new Date(solution.createdAt), solution.status));
+                solutions.push(new CardSolution(solution.encriptedId, solution.title, content, new Date(solution.createdAt), solution.status));
             });
-            console.log(solutionsTemp);
-            setSolutions(solutionsTemp);
+            setSolutions((currentSolutions: any) => currentSolutions.concat(solutions));
         });
     }
 
