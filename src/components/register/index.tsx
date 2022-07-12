@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { MyButton } from "../myButton";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,8 @@ import { postRegister } from "../../services/authService";
 
 export function Register(props: any){
     const dispatch = useDispatch();
+    useEffect(() => {
+    }, [dispatch]);
     const [ loading, setLoading ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState("");
     const { register, trigger: registerTrigger, getValues: registerGetValues } = useForm();

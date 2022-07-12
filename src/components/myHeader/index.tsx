@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useEffect } from "react";
 import "./index.scss";
 import logo from './../../assets/images/logo3.png';
 import SearchInput from "../searchInput";
@@ -7,6 +7,8 @@ import { onToggle } from "../../store/sideNavBar/sideNavBarAction";
 
 export function MyHeader(props: any){
     const dispatch = useDispatch();
+    useEffect(() => {
+    }, [dispatch]);
     const onOpenSidebar = () => {
         dispatch(onToggle(true));
     }

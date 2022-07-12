@@ -13,6 +13,19 @@ import "./index.scss";
 export function SideNavBar(props: any){
     let navigate = useNavigate();
     const dispatch = useDispatch();
+    useEffect(() => {
+        const unsubscribe = store.subscribe(() => {
+            var storeSideNavBarShow = store.getState().sideNavBar.isShowing;
+            setShowSideNavBar(storeSideNavBarShow);
+            var storeLoggedIn = store.getState().auth.isLoggedIn;
+            setLoggedIn(storeLoggedIn);
+            setUsername(retrieveEmail());
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [dispatch]);
     const [showSideNavBar, setShowSideNavBar] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [registerModal, setRegisterModal] = useState(false);
@@ -27,13 +40,7 @@ export function SideNavBar(props: any){
         return navBarStyle;
     }
 
-    store.subscribe(() => {
-        var storeSideNavBarShow = store.getState().sideNavBar.isShowing;
-        setShowSideNavBar(storeSideNavBarShow);
-        var storeLoggedIn = store.getState().auth.isLoggedIn;
-        setLoggedIn(storeLoggedIn);
-        setUsername(retrieveEmail());
-    });
+    
 
     const onCloseSidebar = () => {
         dispatch(onToggle(false));

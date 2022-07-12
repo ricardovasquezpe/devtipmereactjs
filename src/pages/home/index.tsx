@@ -6,6 +6,7 @@ import { CardSolution } from "../../models/cardSolution";
 import { Topic } from "../../models/topic";
 import { postFindSolutions } from "../../services/solutionService";
 import { getTrendingTopics } from "../../services/topicService";
+import store from "../../store/store";
 import "./index.scss";
 
 export function HomePage (props: any){
@@ -18,15 +19,22 @@ export function HomePage (props: any){
     useEffect(() => {
         setLoading(true);
         listTrendings();
-        findSolutions();
+        findSolutions(store.getState().search.search);
         setLoading(false);
-        console.log(solutions);
         window.addEventListener("scroll", onScroll);
 
+        const unsubscribe = store.subscribe(() => {
+            setSolutions([]);
+            offset = 0;
+            noMoreSolutions = false;
+            findSolutions(store.getState().search.search);
+        });
+
         return () => {
+            unsubscribe();
             window.removeEventListener("scroll", onScroll);
         };
-    }, [])
+    }, []);
 
     const listTrendings = () => {
         getTrendingTopics().then((response:any) => {
@@ -38,9 +46,9 @@ export function HomePage (props: any){
         });
     }
 
-    const findSolutions = () => {
+    const findSolutions = (search: string) => {
         var body = {
-            "text": "",
+            "text": search,
             "topic": "",
             "limit": 10,
             "offset": offset
@@ -72,7 +80,7 @@ export function HomePage (props: any){
     const onScroll = () => {
         if ((document.body.scrollHeight - (window.innerHeight + window.scrollY) <= 1) && noMoreSolutions == false) {
             offset = offset + 10;
-            findSolutions();
+            findSolutions(store.getState().search.search);
         }
     }
 

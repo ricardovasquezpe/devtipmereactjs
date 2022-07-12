@@ -17,7 +17,7 @@ export function App(props: any){
   const dispatch = useDispatch();
   useEffect(() => {
     verifyStorageAuth();
-  }, []);
+  }, [dispatch]);
 
   const verifyStorageAuth = async () => {
     if(verifyAuth()){

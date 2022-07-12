@@ -19,16 +19,21 @@ export function SideNavBarContent(props: any){
 
     let navigate = useNavigate();
     const dispatch = useDispatch();
+    useEffect(() => {
+        const unsubscribe = store.subscribe(() => {
+            var storeLoggedIn = store.getState().auth.isLoggedIn;
+            if(storeLoggedIn){
+                setNavItems(navItemsUser);
+            } else {
+                setNavItems(navItemsNoUser);
+            }
+        });
+        
+        return () => {
+            unsubscribe();
+        };
+    }, [dispatch]);
     const [ navItems, setNavItems ] = useState(navItemsNoUser);
-
-    store.subscribe(() => {
-        var storeLoggedIn = store.getState().auth.isLoggedIn;
-        if(storeLoggedIn){
-            setNavItems(navItemsUser);
-        } else {
-            setNavItems(navItemsNoUser);
-        }
-    });
 
     const onNavigationSelection = (navItem: any) => {
         if(navItem.label == "Logout"){
