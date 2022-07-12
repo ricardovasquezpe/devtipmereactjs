@@ -1,0 +1,37 @@
+.confirmationModal-title{
+    font-family:Monserrat-SemiBold;
+    font-size: 18px;
+    color: #414040;
+}
+
+.confirmationModal-title-error{
+    color: #eb4545
+}
+
+.confirmationModal-description{
+    color: #414040;
+}
+
+.confirmationModal-button{
+    width: 100%;
+    border-radius:0.8rem;
+}
+
+.confirmationModal-button:active{
+    outline: none;
+    border: 0px solid solid;
+}
+
+.confirmationModal-button:visited{
+    outline: none;
+    border: 0px solid solid;
+}
+
+.confirmationModal-button:hover{
+    background-color: #414040;
+    color: white;
+}
+
+.confirmationModal-button:focus {
+    outline: none;
+}

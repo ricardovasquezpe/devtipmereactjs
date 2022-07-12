@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
+import ConfirmationModal from "../../components/confirmationModal";
 import LoadingModal from "../../components/loadingModal";
 import { SolutionCard } from "../../components/solutionCard";
 import { CardSolution } from "../../models/cardSolution";
 import { retrieveName } from "../../services/sessionManagerService";
-import { getMysolutions } from "../../services/solutionService";
+import { getMysolutions, updateSolution } from "../../services/solutionService";
 import { getAmountMyTips } from "../../services/tipService";
+import { CONFIRMATION_TYPE_MODAL } from "../../utils/constants";
 import "./index.scss";
 
 export function ProfilePage (props: any){
     const [ loading, setLoading ] = useState(false);
+    const [ confirmationModal, setConfirmationModal ] = useState(false);
     const [ username, setUsername ] = useState("");
     const [ amountMyTipsVal, setAmountMyTipsVal ] = useState(0);
     const [ mySolutions, setMySolutions ] = useState([] as any);
+    const [ solutionIdTemp, setSolutionIdTemp ] = useState("");
 
     useEffect(() => {
         setLoading(true);
@@ -52,17 +56,33 @@ export function ProfilePage (props: any){
 
     const openStatus = (e: any) => {
         const { value } = e.target;
-        const solutionFind = mySolutions.find((sol: CardSolution) => sol.id == value);
-        const solutionFindIndex = mySolutions.findIndex((sol: CardSolution) => sol.id == value);
+        setSolutionIdTemp(value);
+        setConfirmationModal(true);
+    }
 
-        const updateMysolutions = mySolutions.map(function(item: CardSolution, index: any) {
-            if(index === solutionFindIndex){
-                item.status = (item.status == 0) ? 1 : 0;
-            }
+    const onAcceptChangeStatus = () => {
+        let solutionFind: CardSolution = mySolutions.find((sol: CardSolution) => sol.id == solutionIdTemp);
+        
+        let body =  {
+            status: (solutionFind.status == 1) ? 0 : 1
+        };
 
-            return item;
+        updateSolution(solutionIdTemp, body).then((response: any) => {
+            const solutionFindIndex = mySolutions.findIndex((sol: CardSolution) => sol.id == solutionIdTemp);
+            const updateMysolutions = mySolutions.map(function(item: CardSolution, index: any) {
+                if(index === solutionFindIndex){
+                    item.status = (item.status == 0) ? 1 : 0;
+                }
+    
+                return item;
+            });
+            setMySolutions(updateMysolutions);
+            setConfirmationModal(false);
         });
-        setMySolutions(updateMysolutions);
+    }
+
+    const onDeclineChangeStatus = () => {
+        setConfirmationModal(false);
     }
 
     return (
@@ -101,6 +121,13 @@ export function ProfilePage (props: any){
             </div>
 
             <LoadingModal show={loading}></LoadingModal>
+            <ConfirmationModal  show={confirmationModal} 
+                                handleClose={onDeclineChangeStatus} 
+                                type={CONFIRMATION_TYPE_MODAL} 
+                                text="Are you sure want to change the status?" 
+                                title="Confirmation"
+                                onClickAccept={onAcceptChangeStatus}>             
+            </ConfirmationModal>
         </>
     );
 }
