@@ -12,3 +12,6 @@ export const CONFIRMATION_TYPE_MODAL = 1;
 export const SUCCESS_TYPE_MODAL = 2;
 export const ERROR_TYPE_MODAL = 3;
 export const VERIFY_EMAIL_TYPE_MODAL = 4;
+export const TEXT_TYPE_CONTENT = 1;
+export const IMAGE_TYPE_CONTENT = 2;
+export const CODE_TYPE_CONTENT = 3;

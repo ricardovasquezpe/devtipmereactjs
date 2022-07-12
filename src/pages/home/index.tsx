@@ -17,6 +17,7 @@ export function HomePage (props: any){
     let noMoreSolutions:boolean = false;
     let offset: number = 0;
     const { topic } = useParams();
+    let searchText:string = "";
 
     useEffect(() => {
         setLoading(true);
@@ -26,12 +27,16 @@ export function HomePage (props: any){
         window.addEventListener("scroll", onScroll);
 
         const unsubscribe = store.subscribe(() => {
-            setLoading(true);
-            setSolutions([]);
-            offset = 0;
-            noMoreSolutions = false;
-            findSolutions(store.getState().search.search);
-            setLoading(false);
+            let search = store.getState().search.search;
+            if(search != searchText){
+                setLoading(true);
+                setSolutions([]);
+                offset = 0;
+                noMoreSolutions = false;
+                findSolutions(store.getState().search.search);
+                setLoading(false);
+                search = store.getState().search.search;
+            }
         });
 
         return () => {

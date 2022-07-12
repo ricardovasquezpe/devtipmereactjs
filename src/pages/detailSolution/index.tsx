@@ -2,6 +2,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Comment } from "../../components/comment";
+import { Content } from "../../components/content";
 import CustomModal from "../../components/customModal";
 import LoadingModal from "../../components/loadingModal";
 import { Login } from "../../components/login";
@@ -12,6 +13,7 @@ import { Topic } from "../../models/topic";
 import { getCommentsBySolutionId, saveComment } from "../../services/commentsService";
 import { retrieveEmail, verifyAuth } from "../../services/sessionManagerService";
 import { getSolutionById } from "../../services/solutionService";
+import { TEXT_TYPE_CONTENT } from "../../utils/constants";
 import "./index.scss";
 
 export function DetailSolutionPage (props: any){
@@ -125,10 +127,13 @@ export function DetailSolutionPage (props: any){
                 </div>
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="text-solution mb-4 text-center">
-                            
-
-                        </div>
+                        {
+                            solution?.solution?.content?.map((content: any, index: any) => (
+                                <div className="text-solution mb-4 text-center">
+                                    <Content type={content.type} content={content.content}></Content>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="row mb-5">
