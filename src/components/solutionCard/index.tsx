@@ -5,10 +5,6 @@ import "./index.scss";
 
 export function SolutionCard (props: any){
     let navigate = useNavigate();
-    useEffect(() => {
-        props.data.shortDateName = moment(props.data.createdAt).format('MMM') + "." + " " + moment(props.data.createdAt).format('DD');
-    }, [])
-
 
     const goToSolution = () => {
         navigate('/detail-solution/' + encodeURIComponent(props.data.id));
@@ -25,7 +21,7 @@ export function SolutionCard (props: any){
                     </a>
                     <p className="card-text">{props.data.description}</p>
                     <div className="card-footer">
-                        <p className="align-middle">{props.data.shortDateName}</p>
+                        <p className="align-middle">{moment(props.data.createdAt).format('MMM') + "." + " " + moment(props.data.createdAt).format('DD')}</p>
                     </div>
                 </div>
             </div>

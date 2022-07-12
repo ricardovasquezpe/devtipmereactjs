@@ -12,6 +12,12 @@ export function storeNewToken(token: string, emailData: string, nameData: string
     localStorage.setItem(name, nameData);
 }
 
+export function retrieveToken() {
+    let storedToken = localStorage.getItem(jsonWebToken);
+    if(!storedToken) return '';
+    return storedToken;
+}
+
 export function clearSession(){
     localStorage.clear()
 }

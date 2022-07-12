@@ -1,11 +1,11 @@
-import { FIND_SOLUCTIONS_API_URL } from "../utils/constants";
+import { FIND_SOLUCTIONS_API_URL, MY_SOLUTIONS } from "../utils/constants";
+import httpClient from "./config/httpClient";
 
-const axios = require('axios');
-
-const client = axios.create({
-    baseURL: process.env.REACT_APP_API_URL 
-});
 
 export function postFindSolutions(payload: any) {
-    return client.post(FIND_SOLUCTIONS_API_URL, payload);    
+    return httpClient.post(FIND_SOLUCTIONS_API_URL, payload);    
+}
+
+export function getMysolutions() {
+    return httpClient.get(MY_SOLUTIONS);    
 }

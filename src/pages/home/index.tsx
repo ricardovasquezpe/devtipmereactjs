@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingModal from "../../components/loadingModal";
 import { SolutionCard } from "../../components/solutionCard";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
@@ -14,7 +14,6 @@ export function HomePage (props: any){
     const [ loading, setLoading ] = useState(false);
     let noMoreSolutions:boolean = false;
     let offset: number = 0;
-    let solutionsTemp: CardSolution[] = [];
 
     useEffect(() => {
         setLoading(true);

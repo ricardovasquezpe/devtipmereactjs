@@ -11,6 +11,7 @@ import { verifyAuth } from './services/sessionManagerService';
 import { useDispatch } from 'react-redux';
 import { onLogin, onLogout } from './store/auth/authAction';
 import { HomePage } from './pages/home';
+import { ProfilePage } from './pages/profile';
 
 export function App(props: any){
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export function App(props: any){
         <section className="wrap">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="auth" element={<BaseAuthPage />}>
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
