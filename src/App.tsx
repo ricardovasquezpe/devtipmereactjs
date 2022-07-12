@@ -34,7 +34,8 @@ export function App(props: any){
         <MyHeader></MyHeader>
         <section className="wrap">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/search/:topic" element={<HomePage />} />
+            <Route path="/search" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="auth" element={<BaseAuthPage />}>
               <Route path="login" element={<LoginPage />} />

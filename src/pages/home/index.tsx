@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import LoadingModal from "../../components/loadingModal";
 import { SolutionCard } from "../../components/solutionCard";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
@@ -15,6 +16,7 @@ export function HomePage (props: any){
     const [ loading, setLoading ] = useState(false);
     let noMoreSolutions:boolean = false;
     let offset: number = 0;
+    const { topic } = useParams();
 
     useEffect(() => {
         setLoading(true);
@@ -24,10 +26,12 @@ export function HomePage (props: any){
         window.addEventListener("scroll", onScroll);
 
         const unsubscribe = store.subscribe(() => {
+            setLoading(true);
             setSolutions([]);
             offset = 0;
             noMoreSolutions = false;
             findSolutions(store.getState().search.search);
+            setLoading(false);
         });
 
         return () => {
@@ -40,7 +44,7 @@ export function HomePage (props: any){
         getTrendingTopics().then((response:any) => {
             let trendings: Topic[] = [];
             response.data.forEach((topic: any) => {
-                trendings.push(new Topic(topic.title.toUpperCase(), topic.title, topic.total));
+                trendings.push(new Topic(topic.title.toUpperCase(), ("/search/" + topic.title), topic.total));
             });
             setTrendingTopics(trendings);
         });
@@ -49,7 +53,7 @@ export function HomePage (props: any){
     const findSolutions = (search: string) => {
         var body = {
             "text": search,
-            "topic": "",
+            "topic": (topic) ? topic : "",
             "limit": 10,
             "offset": offset
         };

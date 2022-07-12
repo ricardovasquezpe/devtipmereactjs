@@ -8,7 +8,7 @@ const errorInterceptor = (axiosInstance: any) => {
     },(error: any) => {
         if(error.response.status === 403) {
             let navigate = useNavigate();
-            navigate("/");
+            navigate("/search");
             const dispatch = useDispatch();
             dispatch(onLogout());
         }

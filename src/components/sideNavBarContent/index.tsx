@@ -39,7 +39,7 @@ export function SideNavBarContent(props: any){
         if(navItem.label == "Logout"){
             clearSession();
             dispatch(onLogout());
-            navigate("/");
+            navigate("/search");
         } else {
             dispatch(onToggle(false));
             navigate(navItem.route);

@@ -10,7 +10,7 @@ const updateHeaderInterceptor = (axiosInstance: any) => {
             if(!verifyAuth()){
                 clearSession();
                 let navigate = useNavigate();
-                navigate("/");
+                navigate("/search");
                 const dispatch = useDispatch();
                 dispatch(onLogout());
             }
