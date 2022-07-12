@@ -2,18 +2,24 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Comment } from "../../components/comment";
+import CustomModal from "../../components/customModal";
 import LoadingModal from "../../components/loadingModal";
+import { Login } from "../../components/login";
 import { MyButton } from "../../components/myButton";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
+import { CommentSolution } from "../../models/comment";
 import { Topic } from "../../models/topic";
-import { getCommentsBySolutionId } from "../../services/commentsService";
+import { getCommentsBySolutionId, saveComment } from "../../services/commentsService";
+import { retrieveEmail, verifyAuth } from "../../services/sessionManagerService";
 import { getSolutionById } from "../../services/solutionService";
 import "./index.scss";
 
 export function DetailSolutionPage (props: any){
     const [ loading, setLoading ] = useState(false);
+    const [ loginModal, setLoginModal ] = useState(false);
     const [ solution, setSolution ] = useState({} as any);
     const [ comments, setComments ] = useState([] as any);
+    const [ comment, setComment ] = useState("");
     const { solutionId } = useParams();
     let navigate = useNavigate();
 
@@ -35,7 +41,12 @@ export function DetailSolutionPage (props: any){
         });
 
         getCommentsBySolutionId(solutionId).then((response:any) => {
-            setComments(response.data);
+            let data = response.data
+            let commentsTemp: CommentSolution[] = [];
+            data.forEach((com: any) => {
+                commentsTemp.push(new CommentSolution(com.userData.email, com.createdAt, com.comment));
+            });
+            setComments(commentsTemp);
         });
     }
 
@@ -49,6 +60,47 @@ export function DetailSolutionPage (props: any){
 
     const onBack = () => {
         navigate("/search");
+    }
+
+    const createPost = () => {
+        if(!verifyAuth()){
+            setLoginModal(true);
+            return;
+        }
+
+        if(!validateComment()){
+            return;
+        }
+
+        setLoading(true);
+        let body = {
+            "comment": comment,
+            "solutionId": solutionId
+        }
+
+        saveComment(body).then((response:any) => {
+            let data = response.data;
+            console.log(data);
+            setComments((currentComments: any) => [new CommentSolution(retrieveEmail(), new Date(data.comment.createdAt), data.comment.comment)].concat(currentComments));
+            setComment("");
+            setLoading(false);
+        });
+    }
+
+    const validateComment = ():boolean => {
+        if(comment.replace(/\s/g, "") == ""){
+            return false;
+        }
+    
+        if(comment.trim().length <= 5 || comment.trim().length >= 100){
+            return false;
+        }
+    
+        var numLines = comment.split(/\r\n|\r|\n/).length;
+        if(numLines >= 5){
+            return false;
+        }
+        return true;
     }
 
     return (
@@ -90,18 +142,16 @@ export function DetailSolutionPage (props: any){
                 </div>
                 <div className="row container-comments">
                     <div className="col-sm-12">
-                        
+                        <div className="mb-1">
+                            <textarea className="detailSolution-textArea" placeholder="Enter a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
+                        </div>
                         <div className="mb-4 text-center">
-                            <button className="btn detailSolution-btn-mybutton" style={{width: "200px"}}>Post it!</button>
+                            <button className="btn detailSolution-btn-mybutton" style={{width: "200px"}} onClick={createPost}>Post it!</button>
                         </div>
                         <div className="mb-4">
                             {
-                                comments?.map((comment: any, index: any) => (
-                                    <Comment key={index} comment={{
-                                        "username": comment.userData.email,
-                                        "comment": comment.comment,
-                                        "createdAt": comment.createdAt
-                                    }}></Comment>
+                                comments?.map((comment: CommentSolution, index: any) => (
+                                    <Comment key={index} comment={comment}></Comment>
                                 ))
                             }
                         </div>
@@ -110,6 +160,12 @@ export function DetailSolutionPage (props: any){
             </div>
 
             <LoadingModal show={loading}></LoadingModal>
+            <CustomModal show={loginModal}
+                         handleClose={() => setLoginModal(false)}
+                         size="sm"
+                         verticalCenter={true}>
+                <Login handleClose={() => setLoginModal(false)}></Login>
+            </CustomModal>
         </>
     );
 }

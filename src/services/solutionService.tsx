@@ -1,4 +1,4 @@
-import { FIND_SOLUCTIONS_API_URL, MY_SOLUTIONS, SAVE_SOLUTION, SOLUTION_DETAIL } from "../utils/constants";
+import { FIND_SOLUCTIONS_API_URL, MY_SOLUTIONS, UPDATE_SOLUTION, SOLUTION_DETAIL } from "../utils/constants";
 import httpClient from "./config/httpClient";
 
 
@@ -11,7 +11,7 @@ export function getMysolutions() {
 }
 
 export function updateSolution(id: string, data: any) {
-    return httpClient.put(SAVE_SOLUTION + "/" + id + "/status", data);    
+    return httpClient.put(UPDATE_SOLUTION + "/" + id + "/status", data);    
 }
 
 export function getSolutionById(id: any) {

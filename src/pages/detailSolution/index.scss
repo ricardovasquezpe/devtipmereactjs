@@ -64,3 +64,42 @@
     background-color: white;   
     color: black;
 }
+
+.detailSolution-textArea{
+    background-color: #414040;
+    color: white;
+    border: 0px solid transparent;
+    border-radius: 0.8rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    width: 100%;
+    height: auto;
+}
+
+.detailSolution-textArea:hover{
+    border: 0px solid transparent;
+}
+
+.detailSolution-textArea:focus {
+    outline: none;
+    border: 0px solid solid;
+    color: white;
+}
+
+.detailSolution-textArea::placeholder {
+    opacity: 1;
+}
+
+.detailSolution-textArea::-webkit-scrollbar {
+    width: 10px;
+    background: white;
+    border-radius: 0.8rem;
+}
+    
+.detailSolution-textArea::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9;
+    border-radius: 0.8rem;
+}
