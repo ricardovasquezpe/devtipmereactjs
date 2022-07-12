@@ -12,7 +12,7 @@ export function SideNavBarContent(props: any){
         { label: 'Search', route: '/'}
     ];
     const navItemsUser = [
-        { label: 'Search', route: '/'},
+        { label: 'Search', route: '/search'},
         { label: 'New Solution', route: '/new-solution'},
         { label: 'Logout', route: '/logout'}
     ];

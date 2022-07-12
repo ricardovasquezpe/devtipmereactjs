@@ -1,0 +1,55 @@
+.detailSolution-container{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 30px;
+}
+
+.detailSolution-divider {
+    border-top: 1px solid #414040
+}
+
+.detailSolution-author {
+    font-family: Monserrat-SemiBold;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+}
+
+.detailSolution-date {
+    font-size: 13px;
+}
+
+.return-icon{
+    cursor: pointer;
+    display: inline-block;
+    font-size: 35px;
+}
+
+.detailSolution-title{
+    display: inline-block;
+    margin: 0;
+    font-family: Monserrat-SemiBold;
+    font-size: 20px;
+}
+
+.detailSolution-vertical-align {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.text-solution > p {
+    font-size: 15px;
+    margin: 0;
+}
+
+.image-solution > img{
+    width: 100%;
+}
+
+.container-comments{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.loading.modal.show .modal-dialog{
+    width: 80px !important;
+}
