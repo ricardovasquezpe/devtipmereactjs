@@ -1,15 +1,19 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Comment } from "../../components/comment";
 import LoadingModal from "../../components/loadingModal";
+import { MyButton } from "../../components/myButton";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
 import { Topic } from "../../models/topic";
+import { getCommentsBySolutionId } from "../../services/commentsService";
 import { getSolutionById } from "../../services/solutionService";
 import "./index.scss";
 
 export function DetailSolutionPage (props: any){
     const [ loading, setLoading ] = useState(false);
     const [ solution, setSolution ] = useState({} as any);
+    const [ comments, setComments ] = useState([] as any);
     const { solutionId } = useParams();
     let navigate = useNavigate();
 
@@ -28,6 +32,10 @@ export function DetailSolutionPage (props: any){
 
             console.log(data);
             setSolution(data);
+        });
+
+        getCommentsBySolutionId(solutionId).then((response:any) => {
+            setComments(response.data);
         });
     }
 
@@ -83,7 +91,20 @@ export function DetailSolutionPage (props: any){
                 <div className="row container-comments">
                     <div className="col-sm-12">
                         
-
+                        <div className="mb-4 text-center">
+                            <button className="btn detailSolution-btn-mybutton" style={{width: "200px"}}>Post it!</button>
+                        </div>
+                        <div className="mb-4">
+                            {
+                                comments?.map((comment: any, index: any) => (
+                                    <Comment key={index} comment={{
+                                        "username": comment.userData.email,
+                                        "comment": comment.comment,
+                                        "createdAt": comment.createdAt
+                                    }}></Comment>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

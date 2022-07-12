@@ -9,7 +9,7 @@ export function MyButton (props: any){
 
     return (
         <>
-            <button className="myButton" type={props.type} onClick={onButtonClick}>{props.text}</button>
+            <button className="myButton" style={props.style} type={props.type} onClick={onButtonClick}>{props.text}</button>
         </>
     );
 }

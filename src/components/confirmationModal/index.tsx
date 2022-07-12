@@ -2,6 +2,7 @@ import { Modal } from "react-bootstrap";
 import "./index.scss";
 import { ReactComponent as IconMenu } from './../../assets/images/loading.svg'
 import { CONFIRMATION_TYPE_MODAL, ERROR_TYPE_MODAL, SUCCESS_TYPE_MODAL, VERIFY_EMAIL_TYPE_MODAL } from "../../utils/constants";
+import { MyButton } from "../myButton";
 
 const ConfirmationModal = (props: any) => {
   const { show, handleClose, onClickAccept, type, text, title } = props;
@@ -22,10 +23,10 @@ const ConfirmationModal = (props: any) => {
                   <div className="col-sm-12 text-center mt-3">
                     <div className="row">
                         <div className="col-sm-6">
-                          <button className="confirmationModal-button" onClick={onClickAccept}>Yes</button>
+                          <MyButton type="button" text="Yes" onClickAction={onClickAccept}/>
                         </div>
                         <div className="col-sm-6">
-                          <button className="confirmationModal-button" onClick={handleClose}>No</button>
+                          <MyButton type="button" text="No" onClickAction={handleClose}/>
                         </div>
                     </div>
                   </div>
@@ -33,13 +34,13 @@ const ConfirmationModal = (props: any) => {
               {
                 (type == SUCCESS_TYPE_MODAL) && 
                   <div className="col-sm-12 text-center mt-3">
-                    <button className="confirmationModal-button" onClick={handleClose}>Ok</button>
+                    <MyButton type="button" text="Ok" onClickAction={handleClose}/>
                   </div>
               }
               {
                 (type == VERIFY_EMAIL_TYPE_MODAL) && 
                   <div className="col-sm-12 text-center mt-3">
-                      <button className="confirmationModal-button" onClick={onClickAccept}>Redirect me</button>
+                      <MyButton type="button" text="Redirect me" onClickAction={onClickAccept}/>
                   </div>
               }
           </div>

@@ -6,6 +6,7 @@ export const AMOUNT_MY_TIPS = "/v1/tip/my/total";
 export const MY_SOLUTIONS = "/v1/solution/my";
 export const SAVE_SOLUTION = "/v1/solution";
 export const SOLUTION_DETAIL = "/solution";
+export const COMMENTS = "/comment/find";
 export const CONFIRMATION_TYPE_MODAL = 1;
 export const SUCCESS_TYPE_MODAL = 2;
 export const ERROR_TYPE_MODAL = 3;
