@@ -36,6 +36,7 @@ export function DetailSolutionPage (props: any){
             data.solution.topics = response.data.solution.topics.map(function(item: string, index: any) {
                 return new Topic(item, ("/search/" + item), 0);
             });
+            console.log(data);
             setSolution(data);
         });
 
@@ -111,7 +112,7 @@ export function DetailSolutionPage (props: any){
                         <p className="detailSolution-date">{getShortNameDate(solution?.solution?.createdAt)}</p>
                     </div>
                     <div className="col-sm-3">
-                        <Tip></Tip>
+                        <Tip tipTotal={solution?.amount}></Tip>
                     </div>
                 </div>
                 <hr className="detailSolution-divider"/>
@@ -127,7 +128,7 @@ export function DetailSolutionPage (props: any){
                     <div className="col-sm-12">
                         {
                             solution?.solution?.content?.map((content: any, index: any) => (
-                                <div className="text-solution mb-4 text-center">
+                                <div className="text-solution mb-4 text-center" key={index}>
                                     <Content type={content.type} content={content.content}></Content>
                                 </div>
                             ))

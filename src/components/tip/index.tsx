@@ -1,19 +1,24 @@
 import "./index.scss";
 import { Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import codingImage1 from './../../assets/images/coding_1.gif';
 import codingImage2 from './../../assets/images/coding_2.gif';
 import {
     PayPalScriptProvider,
-    PayPalButtons,
-    usePayPalScriptReducer
+    PayPalButtons
 } from "@paypal/react-paypal-js";
 
 export function Tip (props: any){
     const [ tipModal, setTipModal ] = useState(false);
-    const [ tipAmount, setTipAmount ] = useState(1);
+    const [ tipAmount, setTipAmount ] = useState(0);
     const [ screen, setScreen ] = useState(1);
+    const [ showTipAmount, setShowTipAmount ] = useState(false);
     let randomNumber = Math.floor(Math.random() * (3 - 1) + 1);
+    
+    useEffect(() => {
+        setTipAmount(props.tipTotal);
+    }, []);
+
     const paypalInitialOptions = {
         "client-id": "Adt1BlXctAeZQHHV5aDXiLHNQweW3EDCP7NsGKXXhYnQmmkdNhsiTrmWunRWMLgBHChPtYcgvJIiwDTP",
         currency: "USD",
@@ -43,10 +48,15 @@ export function Tip (props: any){
         setScreen(1);
     }
 
+    const mouseOverTip = () => {
+        setShowTipAmount((oldBoolValue) => !oldBoolValue);
+    }
+
     return (
         <>
-            <div className="tip-container" style={{float: "right"}} onClick={() => {setTipModal(true)}}>
-                <span className="material-icons">add</span>
+            <div className="tip-container" style={{float: "right"}} onClick={() => {setTipModal(true)}} onMouseOver={mouseOverTip} onMouseOut={mouseOverTip}>
+                <p className={"tip " + ((showTipAmount) ? "showTipAmount" : "")}>${tipAmount}</p>
+                <span className={"material-icons " + ((!showTipAmount) ? "hideTipIcon" : "")}>add</span>
             </div>
 
             <Modal  onClose={onCloseModal} 

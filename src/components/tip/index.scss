@@ -66,3 +66,15 @@
 .detail-container-pay{
     margin: 20px 30px 20px 30px;
 }
+
+.showTipAmount{
+    visibility: visible;
+    opacity: 0;
+    width: 0;
+}
+
+.hideTipIcon{
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+}
