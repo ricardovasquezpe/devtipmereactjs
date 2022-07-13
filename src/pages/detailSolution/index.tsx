@@ -6,14 +6,13 @@ import { Content } from "../../components/content";
 import CustomModal from "../../components/customModal";
 import LoadingModal from "../../components/loadingModal";
 import { Login } from "../../components/login";
-import { MyButton } from "../../components/myButton";
+import { Tip } from "../../components/tip";
 import { TrendingTopicPill } from "../../components/trendingTopicPill";
 import { CommentSolution } from "../../models/comment";
 import { Topic } from "../../models/topic";
 import { getCommentsBySolutionId, saveComment } from "../../services/commentsService";
 import { retrieveEmail, verifyAuth } from "../../services/sessionManagerService";
 import { getSolutionById } from "../../services/solutionService";
-import { TEXT_TYPE_CONTENT } from "../../utils/constants";
 import "./index.scss";
 
 export function DetailSolutionPage (props: any){
@@ -37,8 +36,6 @@ export function DetailSolutionPage (props: any){
             data.solution.topics = response.data.solution.topics.map(function(item: string, index: any) {
                 return new Topic(item, ("/search/" + item), 0);
             });
-
-            console.log(data);
             setSolution(data);
         });
 
@@ -113,8 +110,9 @@ export function DetailSolutionPage (props: any){
                         <p className="detailSolution-author">{solution?.user?.email}</p>
                         <p className="detailSolution-date">{getShortNameDate(solution?.solution?.createdAt)}</p>
                     </div>
-                    
-
+                    <div className="col-sm-3">
+                        <Tip></Tip>
+                    </div>
                 </div>
                 <hr className="detailSolution-divider"/>
                 <div className="row mb-5">

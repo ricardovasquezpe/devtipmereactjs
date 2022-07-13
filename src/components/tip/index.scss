@@ -1,0 +1,68 @@
+.tip-container {
+    background-color: #135f13;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.tip-container:hover {
+    opacity: 1;
+}
+
+.tip {
+    margin: 0;
+}
+
+.tip {
+    margin: 0;
+}
+
+.myTipModal > .modal-dialog > .modal-content{
+    background-color: #414040;
+}
+
+.myTipModal > .modal-dialog > .modal-content > .modal-body{
+    padding: 0 !important;
+}
+
+.add-tip{
+    margin: 0 auto;
+    opacity: 1;
+}
+
+.continue-container{
+    display: flex;
+    justify-content: end;
+    align-items:center;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.detail-container{
+    margin-top: 130px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header-container{
+    background-color: white;
+    height: 70px;
+}
+
+.super-tip-container{
+    width: 100%;
+    position: absolute;
+    margin-top: -21px;
+}
+
+.detail-container-pay{
+    margin: 20px 30px 20px 30px;
+}
