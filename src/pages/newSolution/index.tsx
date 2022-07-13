@@ -1,13 +1,15 @@
 import { useState } from "react";
 import InputTags from "../../components/inputTags";
+import { Multimedia } from "../../components/multimedia";
 import "./index.scss";
 
 export function NewSolutionPage (props: any){
-        
     const [ tags, setTags ] = useState([]);
+    const [ multimedia, setMultimedia ] = useState([] as any);
 
     const post = () => {
         console.log(tags);
+        console.log(multimedia);
     }
 
     return (
@@ -18,18 +20,7 @@ export function NewSolutionPage (props: any){
                         <input type="text" className="input-text" placeholder="TITLE..." maxLength={50} />
                     </div>
                 </div>
-                <div className="row" >
-                    <div className="col-sm-12">
-                        
-                    </div>
-                </div>
-                <div className="row mb-4">
-                    <div className="col-sm-12">
-                        <div className="text-center">
-                            <span className="material-icons input-icon add-icon">add</span>
-                        </div>
-                    </div>
-                </div>
+                <Multimedia onChangeMultimedia={setMultimedia}></Multimedia>
                 <div className="row mb-4">
                     <div className="col-sm-12">
                         <InputTags onChangeTags={setTags}></InputTags>
