@@ -11,10 +11,10 @@ import {
 
 export function Tip (props: any){
     const [ tipModal, setTipModal ] = useState(false);
-    const [ tipAmount, setTipAmount ] = useState(0);
+    const [ tipAmount, setTipAmount ] = useState(1);
     const [ screen, setScreen ] = useState(1);
     let randomNumber = Math.floor(Math.random() * (3 - 1) + 1);
-    const initialOptions = {
+    const paypalInitialOptions = {
         "client-id": "Adt1BlXctAeZQHHV5aDXiLHNQweW3EDCP7NsGKXXhYnQmmkdNhsiTrmWunRWMLgBHChPtYcgvJIiwDTP",
         currency: "USD",
         intent: "capture"
@@ -83,8 +83,31 @@ export function Tip (props: any){
                         <Modal.Body>
                             <div className="detail-container-pay">
                                 <p className="text-detail" style={{fontSize: "13px", marginBottom: "20px"}}>You can tip with these payment methods</p>
-                                <PayPalScriptProvider options={initialOptions}>
-                                    <PayPalButtons style={{ layout: "horizontal" }} />
+                                <PayPalScriptProvider options={paypalInitialOptions}>
+                                    <PayPalButtons style={{
+                                                        label: 'paypal', 
+                                                        layout: 'horizontal', 
+                                                        color: 'silver', 
+                                                        shape: 'pill'
+                                                    }} 
+                                                    
+                                                    createOrder={(data, actions) => {
+                                                        return actions.order
+                                                            .create({
+                                                                purchase_units: [
+                                                                    {
+                                                                        amount: {
+                                                                            currency_code: "USD",
+                                                                            value: tipAmount.toString(),
+                                                                        },
+                                                                    },
+                                                                ],
+                                                            })
+                                                            .then((orderId) => {
+                                                                console.log(orderId);
+                                                                return orderId;
+                                                            });
+                                                    }}/>
                                 </PayPalScriptProvider>
                             </div>
                             <div className="continue-container float-left" onClick={onBack}>
