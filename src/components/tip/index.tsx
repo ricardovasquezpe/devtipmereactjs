@@ -3,12 +3,22 @@ import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import codingImage1 from './../../assets/images/coding_1.gif';
 import codingImage2 from './../../assets/images/coding_2.gif';
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
 
 export function Tip (props: any){
     const [ tipModal, setTipModal ] = useState(false);
     const [ tipAmount, setTipAmount ] = useState(0);
     const [ screen, setScreen ] = useState(1);
     let randomNumber = Math.floor(Math.random() * (3 - 1) + 1);
+    const initialOptions = {
+        "client-id": "Adt1BlXctAeZQHHV5aDXiLHNQweW3EDCP7NsGKXXhYnQmmkdNhsiTrmWunRWMLgBHChPtYcgvJIiwDTP",
+        currency: "USD",
+        intent: "capture"
+    };
 
     const onCloseModal = () => {
         setTipModal(false);
@@ -73,7 +83,9 @@ export function Tip (props: any){
                         <Modal.Body>
                             <div className="detail-container-pay">
                                 <p className="text-detail" style={{fontSize: "13px", marginBottom: "20px"}}>You can tip with these payment methods</p>
-
+                                <PayPalScriptProvider options={initialOptions}>
+                                    <PayPalButtons style={{ layout: "horizontal" }} />
+                                </PayPalScriptProvider>
                             </div>
                             <div className="continue-container float-left" onClick={onBack}>
                                 <span className="material-icons">keyboard_arrow_left</span>
