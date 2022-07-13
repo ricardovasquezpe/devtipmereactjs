@@ -1,0 +1,68 @@
+.inputTags {
+    color: #fff;
+    background-color: var(--trending-badge-background-color);
+    border-radius: 0.8rem;
+    font-weight: inherit;
+    padding: 5px 10px;
+    font-size: 14px;
+    display: table;
+}
+
+.inputTags-text{
+    display: inline-block;
+    margin:0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inputTags-remove{
+    display: inline-block;
+    font-size: 17px;
+    margin-left: 5px;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.inputTags-remove:hover{
+    opacity: 1;
+}
+
+.inputTags-input{
+    display: inline-block;
+    border-radius: 0.8rem;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left:10px;
+    padding-right:10px;
+    font-size:14px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: -26px;
+    margin-left: 5px;
+    background-color: #414040;
+    border:0px solid transparent;
+    color:white;
+    width: auto;
+    height: 30px;
+}
+
+.inputTags-input:focus {
+    outline: none;
+    border: 0px solid solid;
+    color:white;
+}
+
+.inputTags-input::placeholder{
+    text-align: left;
+}
+
+.container-tags{
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 3px;
+}
+
+.inputTags-container-master{
+    display: table;
+}

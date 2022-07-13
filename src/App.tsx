@@ -13,6 +13,7 @@ import { onLogin, onLogout } from './store/auth/authAction';
 import { HomePage } from './pages/home';
 import { ProfilePage } from './pages/profile';
 import { DetailSolutionPage } from './pages/detailSolution';
+import { NewSolutionPage } from './pages/newSolution';
 
 export function App(props: any){
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export function App(props: any){
             <Route path="/search" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/detail-solution/:solutionId" element={<DetailSolutionPage />} />
+            <Route path="/new-solution" element={<NewSolutionPage />} />
             <Route path="auth" element={<BaseAuthPage />}>
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />

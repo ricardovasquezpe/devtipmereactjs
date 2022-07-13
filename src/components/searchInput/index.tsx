@@ -1,16 +1,19 @@
 import { Component, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { onSearch } from "../../store/search/searchAction";
 import "./index.scss";
 
 export function SearchInput (props: any){
     const dispatch = useDispatch();
+    let navigate = useNavigate();
 
     useEffect(() => {
     }, [dispatch]);
 
     const search = (event:any) => {
         if(event.key === 'Enter'){
+            navigate("/search");
             dispatch(onSearch(event.target.value));
         }
     }
